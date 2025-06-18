@@ -445,7 +445,7 @@ body {
 /* Collection Section */
 .collection__scroll {
   position: relative;
-  min-height: 300vh;
+  /* min-height: 300vh; */
   width: 100%;
   z-index: 10;
   background-color: black;
@@ -479,7 +479,8 @@ body {
   width: max-content;
   align-items: center;
   gap: 8rem;
-  transition: transform 0.3s linear;
+  transition: transform 0.2s linear;
+  flex: 1 0;
 }
 
 .collection__decorative {
@@ -514,7 +515,7 @@ body {
   background: rgba(255, 255, 255, 0.4);
   z-index: 1000;
   border-radius: 3px;
-  display: block; /* Hidden by default */
+  display: block;
 }
 
 .collection-scroll-indicator__bar {
@@ -523,9 +524,4 @@ body {
   background: white;
   border-radius: 3px;
   transition: width 0.1s linear;
-}
-
-/* Show only when collection is active */
-.collection__scroll.active .collection-scroll-indicator {
-  display: block;
 }

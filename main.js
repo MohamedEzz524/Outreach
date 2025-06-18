@@ -70,6 +70,9 @@ const initHorizontalScroll = () => {
   const content = document.querySelector(".collection__content");
   const products = document.querySelector(".collection__products");
 
+  // Create indicator reference
+  const indicator = document.querySelector(".collection-scroll-indicator__bar");
+
   // 1. Calculate scroll distances
   const getScrollDistance = () => {
     const scrollY = window.scrollY;
@@ -83,32 +86,14 @@ const initHorizontalScroll = () => {
     return scrollProgress;
   };
 
-  // Create indicator reference
-  const indicator = document.querySelector(".collection-scroll-indicator__bar");
-
-  // Activate when section is in view
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        scrollSection.classList.toggle("active", entry.isIntersecting);
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  sectionObserver.observe(scrollSection);
-
   // 2. Set up scroll animation
   const animateOnScroll = () => {
     const progress = getScrollDistance();
     const maxScrollWidth = products.scrollWidth - window.innerWidth;
     const translateX = -progress * maxScrollWidth;
+    console.log(window.innerWidth);
 
-    content.style.transform = `translateX(${translateX}px)`;
-
-    // Optional: Parallax effect for decorative element
-    const decorative = document.querySelector(".collection__decorative");
-    decorative.style.transform = `translateX(${progress * 100}px)`;
+    products.style.transform = `translateX(${translateX}px)`;
 
     // Update progress bar
     if (indicator) {
@@ -131,7 +116,7 @@ const initHorizontalScroll = () => {
   // 4. Set up event listeners
   window.addEventListener("load", () => {
     initDimensions();
-    animateOnScroll(); // Initial position
+    animateOnScroll();
   });
 
   window.addEventListener("scroll", () => {
