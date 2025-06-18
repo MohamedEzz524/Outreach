@@ -1,5 +1,5 @@
 const navList = document.querySelector(".navbar__list");
-const navItems = document.querySelectorAll(".navbar__item");
+const navItems = document.querySelectorAll(".navbar__link");
 
 // Select all product cards
 const productCards = document.querySelectorAll(".collection__product-card");
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   root.classList.remove("is-preload");
 
-  initScrollAnimations;
+  initScrollAnimations();
 });
 
 const handleActive = (e) => {
@@ -51,7 +51,8 @@ const initScrollAnimations = () => {
       });
     },
     {
-      threshold: 1,
+      threshold: 0.9,
+      rootMargin: "0% 0% -100px 0% ",
     }
   );
 
