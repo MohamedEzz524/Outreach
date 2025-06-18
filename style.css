@@ -1,0 +1,486 @@
+@font-face {
+  font-family: "BOSTHONSwash";
+  src: url("./assets/fonts/BOSTHONBRUSH.otf") format("opentype"),
+    url("./assets/fonts/BOSTHONSwash.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Futura Bk BT";
+  src: url("assets/fonts/futurabkbtrusbyme_book.otf") format("opentype");
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.is-preload {
+  body {
+    overflow-y: hidden;
+  }
+  .preload__overlay {
+    opacity: 1;
+  }
+  .hero__center {
+    transform: translate(-50%, 10%) scale(1.5);
+  }
+
+  .hero__center-crown {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+body {
+  font-family: "BOSTHONSwash", cursive, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url("./assets/image/nav_background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding: 1rem 5rem;
+  font-size: 28px;
+  z-index: 5;
+}
+
+.navbar__list {
+  display: flex;
+  gap: 1rem;
+  height: 100%;
+  align-items: center;
+  list-style: none;
+}
+
+.navbar__item {
+  min-width: 150px;
+  padding: 0.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s linear;
+}
+
+.navbar__item.active {
+  color: black;
+  z-index: 1;
+}
+
+.navbar__item::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 130%;
+  background-color: white;
+  z-index: -1;
+
+  -webkit-mask-image: url("./assets/image/brush.png");
+  mask-image: url("./assets/image/brush.png");
+  -webkit-mask-size: 0 100%;
+  mask-size: 0 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  transform-origin: left center;
+  transition: -webkit-mask-size 0.25s linear, mask-size 0.25s linear;
+}
+
+.navbar__item.active::before {
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.navbar__logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navbar__actions {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.navbar__menu-button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.navbar__menu-icon {
+  width: 100px;
+  height: 10px;
+}
+
+/* Hero Section */
+.hero {
+  background: url("./assets/image/Background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  z-index: 6;
+  height: calc(100vh - 100px);
+  position: sticky;
+  left: 0;
+  top: 100px;
+  margin-top: 100px;
+  padding: 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.preload__overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.5s ease-out 0.3s;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hero__center {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: fit-content;
+  height: fit-content;
+  transform: translate(-50%) scale(1);
+  transition: transform 0.5s ease-out 0.3s;
+  z-index: 5;
+}
+
+.hero__center-image {
+  position: relative;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+}
+
+.hero__center-crown {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateY(-60%);
+  z-index: 0;
+  opacity: 1;
+  transition: all 0.25s ease-out 0.8s;
+}
+
+/* Hero Top Decoration */
+
+.hero__decoration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.hero__decoration-bg {
+  object-fit: cover;
+}
+
+.hero__decoration-xo {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero__decoration-image {
+  object-fit: cover;
+}
+
+/* Hero content */
+.hero__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-grow: 1;
+  font-family: "Futura Bk BT", sans-serif;
+}
+
+/* Left Column */
+
+.hero__badge {
+  display: flex;
+  align-items: end;
+  position: relative;
+  margin-top: 3rem;
+  gap: 2rem;
+}
+
+.hero__badge-text {
+  font-size: 18px;
+  position: relative;
+  height: 100%;
+  text-align: center;
+  align-self: center;
+}
+.hero__badge-text::before {
+  position: absolute;
+  content: "";
+  left: -20%;
+  bottom: -50%;
+  width: 140%;
+  height: 200%;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.hero__heart {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translate(100%);
+}
+
+.hero__description {
+  max-width: 354px;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 1rem;
+}
+
+/*  Right Column  */
+
+.hero__content-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero__products {
+  display: flex;
+  justify-content: end;
+  gap: 4rem;
+}
+
+.hero__product-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__product-thumb,
+.collection__product-thumb {
+  object-fit: contain;
+  min-width: 180px;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__product__box,
+.collection__product__box {
+  position: relative;
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+}
+
+.hero__product__border,
+.collection__border {
+  position: absolute;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  background-size: cover;
+}
+
+/* Horizontal borders */
+.hero__product--top,
+.collection__border--top {
+  top: 5px;
+  right: -5%;
+  width: 110%;
+  height: 38px;
+  background-position: top center;
+  z-index: 1;
+}
+
+.hero__product--top {
+  background-image: url("./assets/image/vector-top.png");
+}
+.collection__border--top {
+  background-image: url("./assets/image/top-white.png");
+}
+
+.hero__product--bottom,
+.collection__border--bottom {
+  background-image: url("./assets/image/Vector-bottom.png"),
+    url("./assets/image/Vector-top2.png");
+  left: 0;
+  bottom: 5px;
+  width: 100%;
+  height: 38px;
+}
+
+.hero__product--bottom {
+  background-image: url("./assets/image/Vector-bottom.png");
+}
+.collection__border--bottom {
+  background-image: url("./assets/image/bottom-white.png");
+}
+
+.hero__product--left,
+.collection__border--left {
+  background-image: url("./assets/image/Vector-left.png");
+  top: 5px;
+  left: 5px;
+  width: 35px;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero__product--left {
+  background-image: url("./assets/image/Vector-left.png");
+}
+.collection__border--left {
+  background-image: url("./assets/image/left-white.png");
+}
+
+.collection__border--right,
+.hero__product--right {
+  background-image: url("./assets/image/Vector-right.png");
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 100%;
+}
+
+.hero__product--right {
+  background-image: url("./assets/image/Vector-right.png");
+}
+.collection__border--right {
+  background-image: url("./assets/image/right-white.png");
+}
+
+.hero__product-title,
+.collection__product-title {
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 1rem;
+}
+
+.hero__product-price,
+.collection__product-price {
+  font-size: 18px;
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+}
+
+.hero__cta-arrow {
+  align-self: flex-start;
+}
+
+.hero__collection-badge {
+  position: relative;
+}
+
+.hero__badge-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height: auto;
+  white-space: nowrap;
+  font-size: 38px;
+  font-family: "BOSTHONSwash", cursive, sans-serif;
+  font-weight: 400;
+}
+
+/* Collection Section */
+.collection__scroll {
+  position: relative;
+  min-height: 200vh;
+  width: 100%;
+  z-index: 10;
+  overflow: hidden;
+  background-color: black;
+}
+
+.collection {
+  height: 100vh;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding-block: 10rem;
+  color: white;
+  background-color: black;
+}
+
+.collection__heading {
+  font-size: 120px;
+  font-family: "BOSTHONSwash", cursive, sans-serif;
+  text-align: center;
+  margin-block: 2rem;
+}
+
+.collection__content {
+  font-family: "Futura Bk BT";
+  display: flex;
+  flex: 1 0;
+  align-items: center;
+  gap: 8rem;
+}
+
+.collection__decorative {
+  padding-inline: 5rem;
+}
+
+.collection__products {
+  flex-grow: 1;
+  display: flex;
+  gap: 6rem;
+}
+
+.collection__product-card {
+  flex: 1 0 24%;
+  align-self: stretch;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  transition: transform 0.4s ease-out;
+}
