@@ -475,19 +475,22 @@ body {
 .collection__content {
   font-family: "Futura Bk BT";
   display: flex;
-  flex: 1 0;
+  width: max-content;
   align-items: center;
   gap: 8rem;
+  transition: transform 0.3s linear;
 }
 
 .collection__decorative {
-  padding-inline: 5rem;
+  margin-right: 5rem;
 }
 
 .collection__products {
-  flex-grow: 1;
+  flex: 1 0 100%;
   display: flex;
   gap: 6rem;
+  padding-right: 5rem;
+  padding-left: 5rem;
 }
 
 .collection__product-card {

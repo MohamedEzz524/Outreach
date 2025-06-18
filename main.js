@@ -1,10 +1,6 @@
 const navList = document.querySelector(".navbar__list");
 const navItems = document.querySelectorAll(".navbar__link");
 
-// Select all product cards
-const productCards = document.querySelectorAll(".collection__product-card");
-const collectionSection = document.querySelector(".collection");
-
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
   const bodyElement = document.body;
@@ -18,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 800);
 
   initScrollAnimations();
+  initHorizontalScroll();
 });
 
 const handleActive = (e) => {
@@ -29,6 +26,10 @@ const handleActive = (e) => {
 navList.addEventListener("click", handleActive);
 
 const initScrollAnimations = () => {
+  // Select all product cards
+  const productCards = document.querySelectorAll(".collection__product-card");
+  const collectionSection = document.querySelector(".collection");
+
   // Set initial state for each card
   productCards.forEach((card, index) => {
     card.style.transform = "translate(100px, 60vh)";
@@ -56,7 +57,7 @@ const initScrollAnimations = () => {
       });
     },
     {
-      threshold: 0.9,
+      threshold: 0.8,
       rootMargin: "0% 0% -100px 0% ",
     }
   );
@@ -64,4 +65,62 @@ const initScrollAnimations = () => {
   observer.observe(collectionSection);
 };
 
-initScrollAnimations();
+const initHorizontalScroll = () => {
+  const scrollSection = document.querySelector(".collection__scroll");
+  const stickySection = document.getElementById("collection__sticky");
+  const content = document.querySelector(".collection__content");
+  const products = document.querySelector(".collection__products");
+
+  // 1. Calculate scroll distances
+  const getScrollDistance = () => {
+    const scrollY = window.scrollY;
+    const sectionTop = scrollSection.offsetTop;
+    const sectionHeight = scrollSection.offsetHeight - window.innerHeight;
+    const scrollProgress = Math.min(
+      Math.max((scrollY - sectionTop) / sectionHeight, 0),
+      1
+    );
+
+    return scrollProgress;
+  };
+
+  // 2. Set up scroll animation
+  const animateOnScroll = () => {
+    const progress = getScrollDistance();
+    const maxScrollWidth = products.scrollWidth - window.innerWidth;
+    const translateX = -progress * maxScrollWidth;
+
+    content.style.transform = `translateX(${translateX}px)`;
+
+    // Optional: Parallax effect for decorative element
+    const decorative = document.querySelector(".collection__decorative");
+    decorative.style.transform = `translateX(${progress * 100}px)`;
+  };
+
+  // 3. Initialize dimensions
+  const initDimensions = () => {
+    const productsWidth = products.scrollWidth;
+    const viewportWidth = window.innerWidth;
+
+    // Set scroll section height based on content width
+    const heightRatio = stickySection.offsetHeight / viewportWidth;
+    scrollSection.style.minHeight = `${
+      stickySection.offsetHeight + productsWidth * heightRatio
+    }px`;
+  };
+
+  // 4. Set up event listeners
+  window.addEventListener("load", () => {
+    initDimensions();
+    animateOnScroll(); // Initial position
+  });
+
+  window.addEventListener("scroll", () => {
+    animateOnScroll();
+  });
+
+  window.addEventListener("resize", () => {
+    initDimensions();
+    animateOnScroll();
+  });
+};
