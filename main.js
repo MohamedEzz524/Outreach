@@ -32,12 +32,11 @@ const initScrollAnimations = () => {
 
   // Set initial state for each card
   productCards.forEach((card, index) => {
-    card.style.transform = "translate(100px, 60vh)";
+    card.style.transform = "translate(100%, 60vh)";
     card.style.opacity = "0";
     card.style.transition = `
       transform 0.6s ease-out ${index * 0.15}s, 
-      opacity 0.4s ease-out ${index * 0.15}s
-    `;
+      opacity 0.4s ease-out ${index * 0.15}s `;
     card.style.willChange = "transform, opacity";
   });
 
@@ -84,6 +83,21 @@ const initHorizontalScroll = () => {
     return scrollProgress;
   };
 
+  // Create indicator reference
+  const indicator = document.querySelector(".collection-scroll-indicator__bar");
+
+  // Activate when section is in view
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        scrollSection.classList.toggle("active", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  sectionObserver.observe(scrollSection);
+
   // 2. Set up scroll animation
   const animateOnScroll = () => {
     const progress = getScrollDistance();
@@ -95,6 +109,11 @@ const initHorizontalScroll = () => {
     // Optional: Parallax effect for decorative element
     const decorative = document.querySelector(".collection__decorative");
     decorative.style.transform = `translateX(${progress * 100}px)`;
+
+    // Update progress bar
+    if (indicator) {
+      indicator.style.width = `${progress * 100}%`;
+    }
   };
 
   // 3. Initialize dimensions

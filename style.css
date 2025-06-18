@@ -469,7 +469,8 @@ body {
   font-size: 120px;
   font-family: "BOSTHONSwash", cursive, sans-serif;
   text-align: center;
-  margin-block: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 }
 
 .collection__content {
@@ -494,11 +495,37 @@ body {
 }
 
 .collection__product-card {
-  flex: 1 0 24%;
-  align-self: stretch;
+  flex: 1 0 19%;
   text-align: center;
   display: flex;
   flex-direction: column;
   will-change: transform;
   transition: transform 0.4s ease-out;
+}
+
+/* Collection-specific indicator */
+.collection-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: 1000;
+  border-radius: 3px;
+  display: block; /* Hidden by default */
+}
+
+.collection-scroll-indicator__bar {
+  height: 100%;
+  width: 0;
+  background: white;
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+/* Show only when collection is active */
+.collection__scroll.active .collection-scroll-indicator {
+  display: block;
 }
