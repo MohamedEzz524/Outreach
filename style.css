@@ -169,6 +169,31 @@ body {
   flex-direction: column;
 }
 
+.hero__left {
+  position: absolute;
+  left: 0;
+  top: 80px;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hero__right {
+  position: absolute;
+  right: -80px;
+  top: -100px;
+  width: 50%;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  overflow: hidden;
+  height: 100%;
+}
+
 .preload__overlay {
   position: absolute;
   left: 0;
@@ -248,6 +273,9 @@ body {
 }
 
 /* Left Column */
+.hero__content-left {
+  z-index: 2;
+}
 
 .hero__badge {
   display: flex;
@@ -501,7 +529,7 @@ body {
   display: flex;
   flex-direction: column;
   will-change: transform;
-  transition: transform 0.4s ease-out;
+  transition: transform 0.4s ease;
 }
 
 /* Collection-specific indicator */
