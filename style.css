@@ -184,7 +184,7 @@ body {
 
 .hero__right {
   position: absolute;
-  right: -80px;
+  right: 0;
   top: -100px;
   width: 50%;
   display: flex;
